@@ -11,12 +11,14 @@
 |---|---|---|
 | GitHub | ✅ 已推送 v1.2.0 + topics + description | `5682bba` / tag `v1.2.0` |
 | **skillstore.io** | ✅ 排队中（机器人已开 PR） | submission `307dc4ca-…` → PR [aiskillstore/marketplace#3934](https://github.com/aiskillstore/marketplace/pull/3934) |
-| **skillbay.sh** | ✅ 已提交待人工审 | id `jkgw4ddbuid5f16x`，status `new` |
+| **skillbay.sh** | ✅ 已提交待人工审 | id `jkgw4ddbuid5f16x`，status `new` — **只记录，等邀请** |
 | **skillsmd.dev** | ✅ 已提交 | id `44233d3a-32f6-44f9-817a-2efade2b45cf` |
 | **buildwithclaude** | ✅ PR 已开 | [PR #561](https://github.com/davepoon/buildwithclaude/pull/561) |
+| **ClawHub (openclaw)** | ✅ 已发布，等安全扫描 | `create-all-cg-save@1.2.0`（`pending security scans`） |
 | **Cindy SkillHub** | ⚠️ 私有版已上传，公开版被自己占名 | `create-all-cg-save` v1.0.2（private），需先删旧记录 |
 | skills.sh / SkillsMP / claude-plugins.dev | 🟡 自动索引，布局已修好 | 等爬虫 + 需要安装量 / ≥2 stars |
-| 其余登录型 / 托管型 | ⏸ 物料已备，等账号 | 见第 2 节 |
+| Tank (tankpkg.dev) | ❌ CLI 登录接口报错 | `tank login` 返回 `Failed to start auth session: Invalid request body`（v0.16.5），暂不可用 |
+| 其余登录型 / 托管型 | ⏸ 物料已备，等页面提交 | 见第 2 节 |
 
 ## 1. 关键 URL（别填错）
 
@@ -65,8 +67,8 @@ skillstore / skillsmd 的匿名接口根本设不了价；skillbay 的 `price` �
 | Cindy SkillHub | 宿主工具 | ⚠️ | **删掉私有版 `create-all-cg-save` 后重新以 public 创建** |
 | Cow Skill Hub | 登录 + zip | ⏸ | 用 `dist/create-all-cg-save-v1.2.0-skillroot.zip` |
 | agentskill.sh | SPA 表单 | ⏸ | 需人工贴 URL |
-| ClawHub | `clawhub login` + publish | ⏸ | 需登录 |
-| Tank | `tank login` + publish | ⏸ | 需登录 |
+| ClawHub | `clawhub login`（设备码）+ publish | ✅ 已发 1.2.0 | 等安全扫描转 public |
+| Tank | `tank login` + publish | ❌ | CLI 认证接口坏（Invalid request body），换版或等官方修 |
 | 腾讯 SkillHub / 字节 Find Skill / 智谱 AgentMore | 平台侧 | ⏸ | 平台账号 |
 | 扣子 Coze | **需移植** | ⏸ | 平台读不到用户磁盘，得做成服务形态 |
 
@@ -150,10 +152,14 @@ unlock flags, with automatic backup and one-command rollback.
 红线：只做离线单机游戏中你自己合法拥有的副本；不涉及联机、排行榜、反作弊、DRM 绕过。
 ```
 
-## 7. 只剩三件「必须用户本人做」的事
+## 7. 只剩这几件「必须用户本人做」的事
 
-1. **Cindy SkillHub**：删掉私有版 `create-all-cg-save`（Skills 页），我才能用 public 重新创建
-2. **skillbay.sh**：收到邀请后建 seller 账号 + Stripe，然后把第 5 节字段粘进 listing（`price: 5`）
-3. **登录型渠道**（ClawHub / Tank / Cow Skill Hub / agentskill.sh）：各自登录一次即可发；zip 已备好
+1. **Cindy SkillHub**：宿主的 SkillHub 接口只有「搜索 / 发布 / 查状态」，**没有删除动作**，
+   私有版 `create-all-cg-save` v1.0.2 只能在你那边的「技能」页手动删除，然后我重新以 public 创建
+2. **skillbay.sh**：已记录（id `jkgw4ddbuid5f16x`）。收到邀请后再建 seller 账号 + Stripe，
+   然后把第 5 节字段粘进 listing（`price: 5`）
+3. **纯网页表单渠道**（skillhub.cn / agentskill.sh / skillsmp / Cow Skill Hub）：各粘一次仓库 URL
+   或上传 `dist/create-all-cg-save-v1.2.0-skillroot.zip`，字段直接用第 4、6 节
+4. **Tank**：CLI 登录接口当前报错，等官方修复或改用网页端
 
-其余全部已自动化完成或已排进自动索引。
+已脚本化完成：GitHub（v1.2.0 + topics）、skillstore.io、skillsmd.dev、buildwithclaude PR、ClawHub。
