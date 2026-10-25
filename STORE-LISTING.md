@@ -17,6 +17,7 @@
 | **ClawHub (openclaw)** | ✅ 已发布，等安全扫描 | `create-all-cg-save@1.2.0`（`pending security scans`） |
 | **Cow Skill Hub** | ✅ 已提交，等安全检测+审核 | 作者 `xixi048`，包内 12 文件，标签「编程开发」 |
 | **Cindy SkillHub** | ✅ public v1.0.3 上传成功，等审核 | archive-safety / manifest 双闸通过，评分 100 |
+| **腾讯 SkillHub (skillhub.cn)** | ✅ **GitHub 导入发布成功** | `create-all-cg-save` slug 同名，V1.2.0，状态「安全审核中」 |
 | skills.sh / SkillsMP / claude-plugins.dev | 🟡 自动索引，布局已修好 | 等爬虫 + 需要安装量 / ≥2 stars |
 | Tank (tankpkg.dev) | ❌ CLI 登录接口报错 | `tank login` 返回 `Failed to start auth session: Invalid request body`（v0.16.5），暂不可用 |
 | 其余登录型 / 托管型 | ⏸ 物料已备，等页面提交 | 见第 2 节 |
@@ -70,7 +71,7 @@ skillstore / skillsmd 的匿名接口根本设不了价；skillbay 的 `price` �
 | agentskill.sh | SPA 表单 | ⚠️ 卡在 Analyzing | 仓库 URL 已提交，其导入任务无回执；站点从本机网络时通时断 |
 | ClawHub | `clawhub login`（设备码）+ publish | ✅ 已发 1.2.0 | 等安全扫描转 public |
 | Tank | `tank login` + publish | ❌ | CLI 认证接口坏（Invalid request body），换版或等官方修 |
-| 腾讯 SkillHub (skillhub.cn) | 平台侧 | ⛔ 需实名认证 | 发布会跳 `/dashboard/verify`：真实姓名 + 身份证号 + 腾讯云人脸核身，只能本人做 |
+| 腾讯 SkillHub (skillhub.cn) | 平台侧 | ✅ 已发布（GitHub 导入） | 实名认证 + 绑定 GitHub 由用户完成；发布走「从 GitHub 导入」，自动识别 `skills/create-all-cg-save` |
 | 扣子 Coze | **需移植** | ⏸ | 平台读不到用户磁盘，得做成服务形态 |
 
 ## 4. skillstore.io 提交字段（已提交，留档）
@@ -153,16 +154,19 @@ unlock flags, with automatic backup and one-command rollback.
 红线：只做离线单机游戏中你自己合法拥有的副本；不涉及联机、排行榜、反作弊、DRM 绕过。
 ```
 
-## 7. 只剩这几件「必须用户本人做」的事
+## 7. 当前只剩这些
 
-1. **腾讯 SkillHub（skillhub.cn）**：点「发布 Skill」会跳 `/dashboard/verify`，要求**真实姓名 + 身份证号 +
-   腾讯云人脸核身**。这是身份核验，只能你本人做（还要绑定 GitHub 才能关联仓库）。做完我能接着发。
-2. **agentskill.sh**：仓库 URL 已提交，但它的 `Analyzing...` 一直是挂起状态、无回执；该站从本机网络时通时断。
-   等它恢复后重试一次，或用你系统浏览器直接贴 URL。
-3. **skillstore.io 重新提交**：改版后的仓库要再提一次（同一仓库 1 小时内重复提交返回 409），
-   窗口过后一条命令即可（`submit_all.py --channel skillstore`）。
-4. **skillbay.sh**：已记录（id `jkgw4ddbuid5f16x`）。等邀请后建 seller + Stripe，粘第 5 节字段（`price: 5`）。
-5. **SkillsMP / skills.sh**：无提交入口，纯自动索引。SkillsMP 另需 **≥2 stars**，先攒 star。
+1. **skillstore.io 重新提交**：改版后的仓库要再提一次（同一仓库 1 小时内重复提交返回 409，
+   上次提交 21:42Z → 22:42Z 后可提）。一条命令：
+   `python submit_all.py --channel skillstore --repo https://github.com/xixi048/create-all-cg-save`
+2. **agentskill.sh**：仓库 URL 已提交，但它的 `Analyzing...` 一直挂起、无回执；该站网络时通时断。
+3. **skillbay.sh**：已记录（id `jkgw4ddbuid5f16x`）。等邀请后建 seller + Stripe，粘第 5 节（`price: 5`）。
+4. **SkillsMP / skills.sh**：无提交入口，纯自动索引。SkillsMP 另需 **≥2 stars**。
+5. **扣子 / AgentMore / 百炼**：平台托管型，需先移植成服务形态，不属于"上传"。
 
-已脚本化完成：GitHub（v1.2.0 + topics）、skillstore.io（旧布局，in_review）、skillsmd.dev、
-buildwithclaude PR#561、ClawHub 1.2.0、Cow Skill Hub、Cindy SkillHub public v1.0.3。
+## 8. 一条硬规则：能 GitHub 导入就不要本地上传
+
+腾讯 SkillHub 的发布页同时提供「本地上传」和「从 GitHub 导入」。
+**一律选 GitHub 导入**：平台直接从 `xixi048/create-all-cg-save` 的 `skills/create-all-cg-save/`
+读取，仓库是唯一真源，后续 push 即可更新，不会出现"商店版本与仓库不一致"。
+实测该导入器能正确识别 `skills/<name>/` 布局并自动带出 slug / 名称 / frontmatter 描述。
