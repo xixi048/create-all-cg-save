@@ -1,0 +1,13 @@
+{
+  "name": "create-all-cg-save-mcp",
+  "version": "1.3.0",
+  "description": "MCP server for create-all-cg-save: locate, parse, diff and byte-patch the unlock flags of offline single-player game saves, with automatic backup and one-command rollback.",
+  "bin": { "create-all-cg-save-mcp": "bin/mcp.js" },
+  "files": ["bin/mcp.js", "mcp/server.py", "skills/create-all-cg-save"],
+  "keywords": ["mcp", "model-context-protocol", "game-saves", "rpg-maker", "binary-patch", "reverse-engineering", "agent-skills"],
+  "author": "xixi048",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/xixi048/create-all-cg-save.git" },
+  "homepage": "https://github.com/xixi048/create-all-cg-save",
+  "engines": { "node": ">=18" }
+}
