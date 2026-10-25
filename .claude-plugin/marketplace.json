@@ -1,0 +1,54 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "create-all-cg-save",
+  "owner": {
+    "name": "xixi048",
+    "url": "https://github.com/xixi048"
+  },
+  "metadata": {
+    "description": "Byte-level all-CG save unlocker for offline single-player games — locate the save, identify the engine, patch the unlock flags, keep a backup and a one-command rollback.",
+    "version": "1.2.0",
+    "homepage": "https://github.com/xixi048/create-all-cg-save",
+    "repository": "https://github.com/xixi048/create-all-cg-save",
+    "license": "MIT",
+    "keywords": [
+      "agent-skills",
+      "claude-code",
+      "codex",
+      "game-saves",
+      "rpg-maker",
+      "renpy",
+      "reverse-engineering",
+      "binary-patch",
+      "python",
+      "offline"
+    ]
+  },
+  "plugins": [
+    {
+      "name": "create-all-cg-save",
+      "description": "Create an all-CG save for local single-player games: locate the save file, identify the engine, find the bytes that gate CG unlocks, patch them with byte-level precision, with automatic backup and one-command rollback.",
+      "version": "1.2.0",
+      "author": {
+        "name": "xixi048",
+        "url": "https://github.com/xixi048"
+      },
+      "repository": "https://github.com/xixi048/create-all-cg-save",
+      "license": "MIT",
+      "keywords": [
+        "game-saves",
+        "rpg-maker",
+        "binary-patch",
+        "reverse-engineering",
+        "offline",
+        "python"
+      ],
+      "category": "gaming",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/create-all-cg-save"
+      ]
+    }
+  ]
+}

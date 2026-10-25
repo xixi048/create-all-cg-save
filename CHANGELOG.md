@@ -2,6 +2,26 @@
 
 本文件遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 格式，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.2.0] - 2026-10-26
+
+### Changed
+
+- **仓库结构改为标准技能布局**：技能本体从仓库根目录的 `create-all-cg-save/`
+  移到 `skills/create-all-cg-save/`
+  - 原因：GitHub 爬取型目录站（skills.sh / SkillsMP / `npx skills` / Claude Code 插件市场）
+    只索引 `skills/<name>/SKILL.md`。技能放在仓库根目录，**永远不会被自动发现**
+  - 迁移后 `npx skills add xixi048/create-all-cg-save` 与
+    `/plugin marketplace add xixi048/create-all-cg-save` 均可直接使用
+
+### Added
+
+- `.claude-plugin/marketplace.json`：本仓库自身即为一个 Claude Code 插件市场
+- README 增加「一行命令安装」段落与布局说明
+
+### Fixed
+
+- README / README.zh-CN / STORE-LISTING 中所有指向旧路径的链接
+
 ## [1.1.0] - 2026-10-26
 
 ### Added

@@ -28,35 +28,35 @@ with someone else's — it only makes a minimal, surgical edit to a save you alr
 | Engine fast path | Save format is known and parseable | Semantic parsing — jump straight to `switch[N]` / `variable[N]` |
 | Generic diff path | Private binary, unknown structure | Byte diff → fit `start + stride` array → extrapolate |
 
-Decision tree lives in [`create-all-cg-save/SKILL.md`](create-all-cg-save/SKILL.md).
+Decision tree lives in [`skills/create-all-cg-save/SKILL.md`](skills/create-all-cg-save/SKILL.md).
 
 ## Quick start
 
 ```bash
 # 1. Find the save file
-python create-all-cg-save/scripts/save_scout.py --game <game name>
+python skills/create-all-cg-save/scripts/save_scout.py --game <game name>
 
 # 2. RPG Maker VX / VX Ace / XP: inspect structure and current switch state
-python create-all-cg-save/scripts/engines/rgss_save.py inspect "Save01.rvdata2"
+python skills/create-all-cg-save/scripts/engines/rgss_save.py inspect "Save01.rvdata2"
 
 # 3. Build an unlock plan (flip the given switches ON)
-python create-all-cg-save/scripts/engines/rgss_save.py plan-switches \
+python skills/create-all-cg-save/scripts/engines/rgss_save.py plan-switches \
     "Save01.rvdata2" --ids 1,3,5-40 --out plan.json
 
 # 4. Dry-run → apply → verify (apply backs up automatically)
-python create-all-cg-save/scripts/apply_plan.py plan.json --dry-run
-python create-all-cg-save/scripts/apply_plan.py plan.json
-python create-all-cg-save/scripts/apply_plan.py plan.json verify
+python skills/create-all-cg-save/scripts/apply_plan.py plan.json --dry-run
+python skills/create-all-cg-save/scripts/apply_plan.py plan.json
+python skills/create-all-cg-save/scripts/apply_plan.py plan.json verify
 
 # Roll back if anything looks wrong
-python create-all-cg-save/scripts/apply_plan.py plan.json rollback
+python skills/create-all-cg-save/scripts/apply_plan.py plan.json rollback
 ```
 
 Unknown engine? Go through the diff path:
 
 ```bash
-python create-all-cg-save/scripts/save_diff.py A.save B.save --json ab.diff.json
-python create-all-cg-save/scripts/infer_plan.py ab.diff.json \
+python skills/create-all-cg-save/scripts/save_diff.py A.save B.save --json ab.diff.json
+python skills/create-all-cg-save/scripts/infer_plan.py ab.diff.json \
     --target A.save --stride 4 --count 128 --out unlock-plan.json
 ```
 
@@ -78,27 +78,43 @@ python create-all-cg-save/scripts/infer_plan.py ab.diff.json \
 ## Repository layout
 
 ```
-create-all-cg-save/
-├── SKILL.md                      skill entry point (the workflow an agent reads)
-├── scripts/
-│   ├── save_scout.py             locate candidate saves + engine fingerprinting
-│   ├── save_diff.py              byte-level diff of two saves
-│   ├── infer_plan.py             infer the flag array → unlock plan
-│   ├── apply_plan.py             apply / verify / roll back
-│   ├── common.py                 backup, atomic write, hashing
-│   └── engines/
-│       ├── ruby_marshal.py       dependency-free Ruby Marshal parser + encoders
-│       └── rgss_save.py          RPG Maker RGSS save adapter
-└── references/
-    ├── engines.md                per-engine save locations and formats
-    ├── diff-method.md            the full diff-method manual
-    ├── unlock-plan-schema.md     diff / plan JSON schemas
-    └── safety.md                 backup, integrity, and compliance red lines
+create-all-cg-save/                  # repository
+├── .claude-plugin/
+│   └── marketplace.json            plugin-marketplace manifest (`/plugin marketplace add`)
+└── skills/
+    └── create-all-cg-save/         the skill itself (auto-indexed by skills.sh & friends)
+        ├── SKILL.md                skill entry point (the workflow an agent reads)
+        ├── scripts/
+        │   ├── save_scout.py       locate candidate saves + engine fingerprinting
+        │   ├── save_diff.py        byte-level diff of two saves
+        │   ├── infer_plan.py       infer the flag array → unlock plan
+        │   ├── apply_plan.py       apply / verify / roll back
+        │   ├── common.py           backup, atomic write, hashing
+        │   └── engines/
+        │       ├── ruby_marshal.py dependency-free Ruby Marshal parser + encoders
+        │       └── rgss_save.py    RPG Maker RGSS save adapter
+        └── references/
+            ├── engines.md          per-engine save locations and formats
+            ├── diff-method.md      the full diff-method manual
+            ├── unlock-plan-schema.md  diff / plan JSON schemas
+            └── safety.md           backup, integrity, and compliance red lines
 ```
 
 ## Install as a skill
 
-Drop the whole `create-all-cg-save/` directory into your agent's skills directory:
+Straight from the public repo (no clone needed):
+
+```bash
+npx skills add xixi048/create-all-cg-save           # skills.sh / `npx skills` CLI
+```
+
+```text
+/plugin marketplace add xixi048/create-all-cg-save  # Claude Code plugin marketplace
+```
+
+Or copy the folder into your agent's skills directory:
+
+Drop the whole `skills/create-all-cg-save/` directory into your agent's skills directory:
 
 - User level: `~/.workbuddy/skills/create-all-cg-save/`
 - Project level: `<repo>/.workbuddy/skills/create-all-cg-save/`
@@ -106,6 +122,10 @@ Drop the whole `create-all-cg-save/` directory into your agent's skills director
 The directory name must match the `name` field in `SKILL.md` frontmatter (`create-all-cg-save`).
 The frontmatter follows the standard agent-skill shape: `name`, `description` (what + when, with
 Chinese and English trigger keywords), `license`, and `metadata`.
+
+> Why the extra `skills/` level? Directory sites that crawl GitHub (`skills.sh`, SkillsMP,
+> `npx skills`, and Claude Code's plugin marketplaces) only look for `skills/<name>/SKILL.md`.
+> A skill folder sitting at the repo root is never discovered, no matter how good it is.
 
 > Note: all relative paths inside `SKILL.md` are relative to the **skill directory**, not your
 > working directory. `cd` into it first, or prefix the commands with the absolute skill path.
@@ -124,7 +144,7 @@ On a Windows console with a legacy code page you may need `chcp 65001` (or
 - Patches that would change the file length are refused unless `--allow-resize` is passed
 - Always dry-run before applying, and always load the game afterwards to confirm
 
-See [`references/safety.md`](create-all-cg-save/references/safety.md) for the full list.
+See [`references/safety.md`](skills/create-all-cg-save/references/safety.md) for the full list.
 
 ## Known limits
 

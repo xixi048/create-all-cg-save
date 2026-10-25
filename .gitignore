@@ -33,3 +33,6 @@ Thumbs.db
 # ===== 临时文件 =====
 *.allcg-tmp
 nul
+
+# local research scratch (store discovery dumps)
+/research/
