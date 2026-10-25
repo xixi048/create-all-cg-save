@@ -71,7 +71,7 @@ skillstore / skillsmd 的匿名接口根本设不了价；skillbay 的 `price` �
 | agentskill.sh | SPA 表单 | ⚠️ 卡在 Analyzing | 仓库 URL 已提交，其导入任务无回执；站点从本机网络时通时断 |
 | ClawHub | `clawhub login`（设备码）+ publish | ✅ 已发 1.2.0 | 等安全扫描转 public |
 | Tank | `tank login` + publish | ❌ | CLI 认证接口坏（Invalid request body），换版或等官方修 |
-| 腾讯 SkillHub (skillhub.cn) | 平台侧 | ✅ 已发布（GitHub 导入） | 实名认证 + 绑定 GitHub 由用户完成；发布走「从 GitHub 导入」，自动识别 `skills/create-all-cg-save` |
+| 腾讯 SkillHub (skillhub.cn) | 平台侧 | ✅ **已发布（审核通过）** | `创建一个全 CG 存档` v1.2.0，走「从 GitHub 导入」 |
 | 扣子 Coze | **需移植** | ⏸ | 平台读不到用户磁盘，得做成服务形态 |
 
 ## 4. skillstore.io 提交字段（已提交，留档）
