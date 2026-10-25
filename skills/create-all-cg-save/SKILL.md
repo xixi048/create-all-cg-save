@@ -4,7 +4,7 @@ description: "Create an all-CG save for local single-player games (galgame / AVG
 license: MIT
 metadata:
   author: xixi048
-  version: "1.2.0"
+  version: "1.3.0"
   language: zh-CN
 ---
 

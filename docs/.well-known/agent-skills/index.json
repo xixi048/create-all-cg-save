@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agentskills.io/schema/well-known-index.json",
+  "version": 1,
+  "publisher": { "name": "xixi048", "url": "https://github.com/xixi048" },
+  "updated": "2026-10-26",
+  "skills": [
+    {
+      "name": "create-all-cg-save",
+      "description": "Create an all-CG save for local single-player games by byte-patching the unlock flags, with automatic backup and one-command rollback.",
+      "version": "1.3.0",
+      "source": "https://github.com/xixi048/create-all-cg-save",
+      "path": "skills/create-all-cg-save/SKILL.md",
+      "install": {
+        "skills_cli": "npx skills add xixi048/create-all-cg-save",
+        "plugin_marketplace": "/plugin marketplace add xixi048/create-all-cg-save"
+      },
+      "mcp": {
+        "command": "python",
+        "args": ["<repo>/mcp/server.py"],
+        "tools": ["save_scout", "engine_inspect", "plan_unlock_switches", "diff_saves", "infer_unlock_plan", "apply_plan"]
+      },
+      "license": "MIT",
+      "tags": ["game-saves", "rpg-maker", "binary-patch", "reverse-engineering", "offline"]
+    }
+  ]
+}

@@ -130,6 +130,31 @@ Chinese and English trigger keywords), `license`, and `metadata`.
 > Note: all relative paths inside `SKILL.md` are relative to the **skill directory**, not your
 > working directory. `cd` into it first, or prefix the commands with the absolute skill path.
 
+## Use as an MCP server
+
+The whole toolkit is also exposed over MCP (stdio, zero dependencies), so any MCP-capable agent can
+drive it without knowing the repo layout:
+
+```json
+{
+  "mcpServers": {
+    "create-all-cg-save": {
+      "command": "python",
+      "args": ["C:/path/to/create-all-cg-save/mcp/server.py"]
+    }
+  }
+}
+```
+
+Tools: `save_scout` · `engine_inspect` · `plan_unlock_switches` · `diff_saves` · `infer_unlock_plan` · `apply_plan`
+(`apply_plan` takes `action: dry_run | apply | verify | rollback`; apply always backs up first).
+
+Machine-discoverable index:
+
+```text
+https://xixi048.github.io/create-all-cg-save/.well-known/agent-skills/index.json
+```
+
 ## Requirements
 
 Python 3.8+, **zero third-party dependencies** (standard library only).

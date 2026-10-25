@@ -2,6 +2,16 @@
 
 本文件遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 格式，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.3.0] - 2026-10-26
+
+### Added
+
+- **MCP server**（`mcp/server.py`，stdio / JSON-RPC 2.0 / 零依赖）：把整套工具暴露给任意 MCP 客户端
+  - `save_scout` · `engine_inspect` · `plan_unlock_switches` · `diff_saves` · `infer_unlock_plan` · `apply_plan`
+  - `apply_plan` 用 `action` 区分 dry_run / apply / verify / rollback，写入仍然先自动备份
+- **自建发现端点**：`docs/.well-known/agent-skills/index.json`，经 GitHub Pages 发布
+  （附空的 `docs/.nojekyll` —— Jekyll 默认跳过点目录，不加会 404）
+
 ## [1.2.0] - 2026-10-26
 
 ### Changed
