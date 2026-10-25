@@ -1,0 +1,10 @@
+# 统一换行符，避免 Windows / macOS 之间的 CRLF 抖动
+* text=auto eol=lf
+
+# 二进制存档格式（正常不会被提交，这里只是兜底）
+*.rvdata2 -text
+*.rvdata  -text
+*.rxdata  -text
+*.rpgsave -text
+*.png     -text
+*.jpg     -text

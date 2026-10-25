@@ -1,0 +1,35 @@
+# ===== 验证用的游戏样本（含版权内容，禁止入库） =====
+tests/
+**/*.rvdata2
+**/*.rvdata
+**/*.rxdata
+**/*.rpgsave
+**/*.xp3
+**/*.rpa
+**/*.rgss3a
+**/*.rgss2a
+**/*.rgssad
+**/*.save
+**/*.sav
+*.allcg-bak-*
+*.allcg-tmp
+**/script_*.rb
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ===== 编辑器 / 系统 =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ===== 内部状态（注意：不要删除 .workbuddy 目录，它存的是项目数据不是缓存） =====
+.workbuddy/
+
+# ===== 临时文件 =====
+*.allcg-tmp
+nul
