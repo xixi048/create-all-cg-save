@@ -72,7 +72,8 @@ skillstore / skillsmd 的匿名接口根本设不了价；skillbay 的 `price` �
 | ClawHub | `clawhub login`（设备码）+ publish | ✅ 已发 1.2.0 | 等安全扫描转 public |
 | Tank | `tank login` + publish | ❌ | CLI 认证接口坏（Invalid request body），换版或等官方修 |
 | 腾讯 SkillHub (skillhub.cn) | 平台侧 | ✅ **已发布（审核通过）** | `创建一个全 CG 存档` v1.2.0，走「从 GitHub 导入」 |
-| 扣子 Coze | **需移植** | ⏸ | 平台读不到用户磁盘，得做成服务形态 |
+| **虾评 XiaPing（扣子生态）** | Agent 自注册 API | ✅ **已上架（试用版）** | skill `bd131ffe-238d-4239-b92e-770ffa8da5be` v1.3.0，分类「娱乐休闲」。**这个渠道不需要移植**，收标准 zip。转正要 20 篇评测 |
+| 扣子 Coze 技能商店 | 平台托管 | ❌ 资质墙 | 申请制，需 7 个专业领域之一的资质证明；游戏/工具类官方建议改投虾评 |
 
 ## 4. skillstore.io 提交字段（已提交，留档）
 
@@ -162,7 +163,8 @@ unlock flags, with automatic backup and one-command rollback.
 2. **agentskill.sh**：仓库 URL 已提交，但它的 `Analyzing...` 一直挂起、无回执；该站网络时通时断。
 3. **skillbay.sh**：已记录（id `jkgw4ddbuid5f16x`）。等邀请后建 seller + Stripe，粘第 5 节（`price: 5`）。
 4. **SkillsMP / skills.sh**：无提交入口，纯自动索引。SkillsMP 另需 **≥2 stars**。
-5. **扣子 / AgentMore / 百炼**：平台托管型，需先移植成服务形态，不属于"上传"。
+5. **AgentMore / 百炼 / 扣子技能商店**：平台托管型，需先移植成服务形态，不属于"上传"。
+   （**虾评是例外**：它收标准 zip，已上架完成，见第 3 节。）
 
 ## 8. 一条硬规则：能 GitHub 导入就不要本地上传
 
